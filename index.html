@@ -167,13 +167,16 @@
     /* METODOLOGIA CARDS */
     .metodologia { background: var(--navy); }
     .metodologia-header { text-align: center; margin-bottom: 56px; }
-    .pilares-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .pilares-grid .metodo-item:nth-child(4) { grid-column: 1 / 2; margin-left: calc(50% + 10px); width: calc(100%); }
-    .pilares-grid .metodo-item:nth-child(5) { grid-column: 2 / 3; width: 100%; }
-    .metodo-item { padding: 28px; background: var(--navy-mid); border-radius: var(--radius); border-left: 3px solid var(--gold); border-top: 1px solid rgba(255,255,255,0.06); transition: transform var(--transition), background var(--transition); }
-    .metodo-item:hover { transform: translateY(-4px); background: var(--navy-light); }
-    .metodo-item h3 { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; text-transform: uppercase; color: var(--white); margin-bottom: 10px; letter-spacing: 0.04em; }
-    .metodo-item p { font-size: 0.9rem; line-height: 1.65; color: rgba(255,255,255,0.65); }
+    .pilares-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 24px; }
+    .pilares-grid .metodo-item { grid-column: span 2; }
+    .pilares-grid .metodo-item:nth-child(4) { grid-column: 2 / 4; }
+    .pilares-grid .metodo-item:nth-child(5) { grid-column: 4 / 6; }
+    .metodo-item { position: relative; padding: 32px 28px 28px; background: var(--navy-mid); border-radius: var(--radius); border-top: 3px solid var(--gold); border-bottom: 1px solid rgba(255,255,255,0.05); overflow: hidden; transition: transform var(--transition), background var(--transition), box-shadow var(--transition); }
+    .metodo-item::before { content: attr(data-num); position: absolute; top: -10px; right: 16px; font-family: var(--font-display); font-size: 7rem; font-weight: 900; color: var(--gold); opacity: 0.07; line-height: 1; pointer-events: none; user-select: none; }
+    .metodo-item:hover { transform: translateY(-5px); background: var(--navy-light); box-shadow: 0 12px 40px rgba(0,0,0,0.35); }
+    .metodo-item:hover::before { opacity: 0.12; }
+    .metodo-item h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; text-transform: uppercase; color: var(--white); margin-bottom: 12px; letter-spacing: 0.04em; display: flex; align-items: center; gap: 8px; }
+    .metodo-item p { font-size: 0.88rem; line-height: 1.7; color: rgba(255,255,255,0.6); }
 
     /* TESTIMONIALS */
     .testimonials { background: var(--white); }
@@ -244,7 +247,10 @@
       .stats-grid { justify-content: center; }
       .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(13,27,42,0.15); }
       .pilares-grid { grid-template-columns: 1fr; }
-      .pilares-grid .metodo-item:nth-child(4), .pilares-grid .metodo-item:nth-child(5) { grid-column: auto; margin: 0; width: 100%; }
+      .pilares-grid .metodo-item,
+      .pilares-grid .metodo-item:nth-child(4),
+      .pilares-grid .metodo-item:nth-child(5) { grid-column: auto; }
+      .metodo-item::before { font-size: 5rem; }
       .metodologia-foto { height: 260px; }
       .whatsapp-fixed span { display: none; }
       .whatsapp-fixed { padding: 16px 18px; }
@@ -402,11 +408,11 @@
         <h2 class="section-title light" data-i18n="metodologia.title">Cinco Pilares<br>do Atleta Completo</h2>
       </div>
       <div class="pilares-grid">
-        <div class="metodo-item reveal"><h3 data-i18n="metodologia.p1.title">⛵ Boat Handling</h3><p data-i18n="metodologia.p1.text">Tacks, gybes, partidas e saídas. A diferença entre um atleta mediano e um campeão está nos detalhes técnicos que nenhum livro consegue ensinar — mas a experiência olímpica, sim.</p></div>
-        <div class="metodo-item reveal"><h3 data-i18n="metodologia.p2.title">🧭 Estratégia & Táticas</h3><p data-i18n="metodologia.p2.text">Leitura de vento, posicionamento na largada, tomada de decisão sob pressão. Bruno treinou atletas que conquistaram ouro olímpico. Esses padrões estão nos seus programas.</p></div>
-        <div class="metodo-item reveal"><h3 data-i18n="metodologia.p3.title">🏋️ Força & Condicionamento</h3><p data-i18n="metodologia.p3.text">Endurance, core, força e mobilidade adaptados para vela. Parceria com a plataforma Bridge Athletic para programas científicos e progressivos.</p></div>
-        <div class="metodo-item reveal"><h3 data-i18n="metodologia.p4.title">🧠 Mindset</h3><p data-i18n="metodologia.p4.text">Foco, resiliência, gestão de pressão. Bruno viveu três ciclos olímpicos — e sabe como preparar a mente para competição de alto rendimento.</p></div>
-        <div class="metodo-item reveal"><h3 data-i18n="metodologia.p5.title">🥗 Nutrição</h3><p data-i18n="metodologia.p5.text">Alimentação otimizada para atletas de vela: energia para hiking, recuperação pós-treino, hidratação em regata. Estratégias práticas, não dietas impossíveis.</p></div>
+        <div class="metodo-item reveal" data-num="01"><h3 data-i18n="metodologia.p1.title">⛵ Boat Handling</h3><p data-i18n="metodologia.p1.text">Tacks, gybes, partidas e saídas. A diferença entre um atleta mediano e um campeão está nos detalhes técnicos que nenhum livro consegue ensinar — mas a experiência olímpica, sim.</p></div>
+        <div class="metodo-item reveal" data-num="02"><h3 data-i18n="metodologia.p2.title">🧭 Estratégia & Táticas</h3><p data-i18n="metodologia.p2.text">Leitura de vento, posicionamento na largada, tomada de decisão sob pressão. Bruno treinou atletas que conquistaram ouro olímpico. Esses padrões estão nos seus programas.</p></div>
+        <div class="metodo-item reveal" data-num="03"><h3 data-i18n="metodologia.p3.title">🏋️ Força & Condicionamento</h3><p data-i18n="metodologia.p3.text">Endurance, core, força e mobilidade adaptados para vela. Parceria com a plataforma Bridge Athletic para programas científicos e progressivos.</p></div>
+        <div class="metodo-item reveal" data-num="04"><h3 data-i18n="metodologia.p4.title">🧠 Mindset</h3><p data-i18n="metodologia.p4.text">Foco, resiliência, gestão de pressão. Bruno viveu três ciclos olímpicos — e sabe como preparar a mente para competição de alto rendimento.</p></div>
+        <div class="metodo-item reveal" data-num="05"><h3 data-i18n="metodologia.p5.title">🥗 Nutrição</h3><p data-i18n="metodologia.p5.text">Alimentação otimizada para atletas de vela: energia para hiking, recuperação pós-treino, hidratação em regata. Estratégias práticas, não dietas impossíveis.</p></div>
       </div>
     </div>
   </section>
