@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conceito 2 — Olympic Gold</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #F8F4EE;
+    --cream-dark: #EFE9DF;
+    --navy: #0B1C2E;
+    --navy-mid: #14253A;
+    --gold: #B8941F;
+    --gold-light: #D4AA38;
+    --gold-pale: rgba(184,148,31,0.12);
+    --text: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --text-light: #888;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { background: var(--cream); color: var(--text); font-family: 'Montserrat', sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 72px;
+    background: rgba(248,244,238,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184,148,31,0.2);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; letter-spacing: 0.08em;
+    color: var(--navy);
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a {
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--text-mid); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta {
+    background: var(--navy); color: var(--cream) !important;
+    padding: 11px 24px; letter-spacing: 0.12em !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 55% 45%;
+    padding-top: 88px;
+  }
+  .hero-left {
+    background: var(--navy);
+    position: relative; overflow: hidden;
+    display: flex; align-items: flex-end;
+  }
+  .hero-bg-text {
+    position: absolute; top: 0; left: -20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30rem; font-weight: 700;
+    color: rgba(255,255,255,0.03);
+    line-height: 0.8; pointer-events: none;
+    user-select: none;
+  }
+  .hero-img-area {
+    width: 100%; height: 100%;
+    position: relative; overflow: hidden;
+  }
+  .hero-img-area img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 25%;
+    filter: brightness(0.7) saturate(0.75);
+  }
+  .hero-img-area::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(11,28,46,0.75) 0%, transparent 55%),
+                linear-gradient(to right, transparent 60%, rgba(248,244,238,0.15) 100%);
+  }
+  .hero-photo-sim { display: none; }
+  .hero-caption {
+    position: absolute; bottom: 40px; left: 40px; right: 40px;
+    z-index: 3;
+    border-top: 1px solid rgba(184,148,31,0.4);
+    padding-top: 16px;
+    display: flex; justify-content: space-between; align-items: flex-end;
+  }
+  .hero-caption-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 400; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.7);
+  }
+  .hero-caption-detail {
+    font-size: 0.6rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold);
+  }
+
+  /* Gold accent line */
+  .hero-left::after {
+    content: '';
+    position: absolute; top: 0; right: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+  }
+
+  .hero-right {
+    background: var(--cream);
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 72px;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.62rem; font-weight: 600; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 4.5vw, 5.2rem);
+    font-weight: 600; line-height: 1.05;
+    color: var(--navy); margin-bottom: 12px;
+  }
+  .hero-h1 em { font-style: italic; color: var(--gold); }
+
+  .hero-sub-serif {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-style: italic; font-weight: 400;
+    color: var(--text-mid); line-height: 1.6;
+    margin: 20px 0 40px;
+    max-width: 380px;
+  }
+
+  .hero-credentials {
+    display: flex; flex-direction: column; gap: 12px;
+    margin-bottom: 48px;
+    padding: 24px; background: var(--cream-dark);
+    border-left: 3px solid var(--gold);
+  }
+  .credential-item {
+    display: flex; align-items: center; gap: 16px;
+    font-size: 0.75rem; font-weight: 500; color: var(--text-mid);
+    letter-spacing: 0.06em;
+  }
+  .credential-item strong { color: var(--navy); font-weight: 700; }
+  .cred-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold); flex-shrink: 0;
+  }
+
+  .hero-btns { display: flex; gap: 20px; align-items: center; }
+  .btn-navy {
+    background: var(--navy); color: var(--cream);
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 16px 36px;
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s;
+  }
+  .btn-navy:hover { background: var(--navy-mid); }
+  .btn-text {
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-light); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 2px;
+    transition: color 0.2s;
+  }
+  .btn-text:hover { color: var(--navy); }
+
+  /* STATS */
+  .stats {
+    background: var(--navy);
+    padding: 56px 72px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    text-align: center; padding: 0 20px;
+    border-right: 1px solid rgba(184,148,31,0.2);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 700;
+    color: var(--gold); line-height: 1;
+  }
+  .stat-l {
+    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    margin-top: 8px;
+  }
+
+  /* SOBRE */
+  .sobre {
+    background: var(--white);
+    padding: 120px 72px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 100px;
+    align-items: center;
+  }
+  .sobre-eyebrow {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sobre-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .sobre-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 4rem);
+    font-weight: 600; line-height: 1.1;
+    color: var(--navy); margin-bottom: 28px;
+  }
+  .sobre-h2 em { font-style: italic; color: var(--gold); }
+  .sobre-p {
+    font-size: 0.88rem; line-height: 1.9; color: var(--text-mid);
+    margin-bottom: 20px;
+  }
+  .sobre-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-style: italic; font-weight: 500;
+    color: var(--navy); line-height: 1.5;
+    border-left: 3px solid var(--gold);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: var(--gold-pale);
+  }
+  .sobre-img-col { position: relative; }
+  .sobre-img-main {
+    height: 500px;
+    position: relative; overflow: hidden;
+  }
+  .sobre-img-main img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center 15%;
+    filter: brightness(0.75) saturate(0.8);
+  }
+  .sobre-img-main::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 50%; background: linear-gradient(to top, rgba(11,28,46,0.7), transparent);
+    z-index: 1;
+  }
+  .sobre-img-main-icon { display: none; }
+  .sobre-img-caption {
+    position: absolute; bottom: 24px; left: 24px; right: 24px;
+    font-size: 0.62rem; font-weight: 500; letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.55); text-transform: uppercase;
+    border-top: 1px solid rgba(184,148,31,0.3);
+    padding-top: 12px;
+  }
+  .sobre-img-badge {
+    position: absolute; top: -16px; right: -16px;
+    background: var(--gold); color: var(--white);
+    width: 100px; height: 100px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .sobre-img-badge strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem; font-weight: 700; line-height: 1;
+    color: var(--white);
+  }
+  .sobre-img-badge span {
+    font-size: 0.55rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; color: rgba(255,255,255,0.8);
+  }
+
+  /* PROGRAMAS */
+  .programas {
+    background: var(--cream);
+    padding: 120px 72px;
+  }
+  .section-header { text-align: center; margin-bottom: 72px; }
+  .section-eyebrow {
+    font-size: 0.62rem; font-weight: 700; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--gold);
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .section-eyebrow::before, .section-eyebrow::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold); }
+  .section-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 4.5rem);
+    font-weight: 600; color: var(--navy); line-height: 1.1;
+  }
+  .section-h2 em { font-style: italic; color: var(--gold); }
+
+  .programs-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    background: rgba(184,148,31,0.15);
+  }
+  .prog-card {
+    background: var(--white); padding: 48px 36px;
+    transition: background 0.3s;
+    cursor: pointer; position: relative;
+  }
+  .prog-card:hover { background: var(--navy); }
+  .prog-card:hover * { color: rgba(255,255,255,0.8) !important; }
+  .prog-card:hover .prog-title { color: var(--white) !important; }
+  .prog-card:hover .prog-tag { color: var(--gold) !important; }
+  .prog-card:hover .prog-cta { background: var(--gold) !important; color: var(--navy) !important; }
+  .prog-card.featured { background: var(--navy); }
+  .prog-card.featured * { color: rgba(255,255,255,0.7) !important; }
+  .prog-card.featured .prog-title { color: var(--white) !important; }
+  .prog-card.featured .prog-tag { color: var(--gold) !important; }
+  .prog-tag {
+    font-size: 0.58rem; font-weight: 700; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px; display: flex; align-items: center; gap: 8px;
+  }
+  .prog-tag::before { content: ''; width: 16px; height: 1px; background: currentColor; }
+  .prog-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700;
+    color: var(--navy); margin-bottom: 16px; line-height: 1.1;
+  }
+  .prog-desc {
+    font-size: 0.82rem; line-height: 1.8;
+    color: var(--text-mid); margin-bottom: 28px;
+  }
+  .prog-divider { width: 40px; height: 1px; background: var(--gold); margin: 24px 0; }
+  .prog-features { list-style: none; margin-bottom: 36px; }
+  .prog-features li {
+    font-size: 0.76rem; padding: 9px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--text-mid);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .prog-features li::before {
+    content: ''; width: 5px; height: 5px;
+    background: var(--gold); border-radius: 50%; flex-shrink: 0;
+  }
+  .prog-cta {
+    display: block; text-align: center;
+    background: var(--navy); color: var(--cream);
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 15px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .prog-card:not(.featured) .prog-cta { background: transparent; color: var(--navy); border: 1px solid rgba(11,28,46,0.3); }
+  .prog-card:not(.featured) .prog-cta:hover { background: var(--navy); color: var(--cream); }
+  .prog-card.featured .prog-cta { background: var(--gold) !important; color: var(--navy) !important; }
+
+  /* TIMELINE */
+  .timeline-section {
+    background: var(--navy);
+    padding: 120px 72px;
+  }
+  .timeline-header { text-align: center; margin-bottom: 80px; }
+  .timeline-header .section-eyebrow { color: var(--gold); }
+  .timeline-header .section-eyebrow::before,
+  .timeline-header .section-eyebrow::after { background: var(--gold); opacity: 0.4; }
+  .timeline-header .section-h2 { color: var(--white); }
+  .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+  .timeline::before {
+    content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px; background: rgba(184,148,31,0.3);
+    transform: translateX(-50%);
+  }
+  .tl-item {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 48px; margin-bottom: 56px; align-items: center;
+  }
+  .tl-item:nth-child(even) .tl-content { order: 2; text-align: left; }
+  .tl-item:nth-child(even) .tl-year { order: 1; text-align: right; }
+  .tl-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 700; color: var(--gold);
+    line-height: 1; position: relative;
+  }
+  .tl-year::after {
+    content: '';
+    position: absolute; top: 50%; right: -24px;
+    width: 10px; height: 10px;
+    background: var(--gold); border-radius: 50%;
+    transform: translateY(-50%);
+  }
+  .tl-item:nth-child(even) .tl-year::after { right: auto; left: -24px; }
+  .tl-content {}
+  .tl-event {
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+  }
+  .tl-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 500; color: var(--white); line-height: 1.4;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--cream-dark);
+    padding: 120px 72px;
+    text-align: center;
+  }
+  .cta-line { width: 60px; height: 2px; background: var(--gold); margin: 0 auto 32px; }
+  .cta-h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 600; color: var(--navy);
+    line-height: 1.1; margin-bottom: 20px;
+  }
+  .cta-h2 em { font-style: italic; color: var(--gold); }
+  .cta-sub {
+    font-size: 0.88rem; color: var(--text-mid);
+    max-width: 480px; margin: 0 auto 48px; line-height: 1.8;
+  }
+  .btn-gold {
+    display: inline-block;
+    background: var(--gold); color: var(--white);
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; padding: 18px 48px;
+    text-decoration: none; margin-right: 16px;
+    transition: background 0.2s;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy); padding: 48px 72px;
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(184,148,31,0.2);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 600; letter-spacing: 0.08em; color: var(--white);
+  }
+  .footer-logo span { color: var(--gold); }
+  .footer-copy { font-size: 0.62rem; color: rgba(255,255,255,0.3); letter-spacing: 0.1em; }
+
+  /* CONCEPT BADGE */
+  .concept-badge {
+    position: fixed; bottom: 24px; right: 24px; z-index: 999;
+    background: var(--gold); color: var(--white);
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em;
+    text-transform: uppercase; padding: 10px 20px;
+    box-shadow: 0 4px 24px rgba(184,148,31,0.35);
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Bruno <span>Fontes</span></div>
+  <div class="nav-links">
+    <a href="#">Sobre</a>
+    <a href="#">Programas</a>
+    <a href="#">Legado</a>
+    <a href="#">Palestras</a>
+    <a href="#" class="nav-cta">Consultoria →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-bg-text">BF</div>
+    <div class="hero-img-area">
+      <img src="../images/hero.jpg" alt="Bruno Fontes velejando">
+      <div class="hero-photo-sim"></div>
+    </div>
+    <div class="hero-caption">
+      <span class="hero-caption-name">Bruno Fontes</span>
+      <span class="hero-caption-detail">Atlanta · Sydney · Atenas</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-eyebrow">Velejador Olímpico Brasileiro</div>
+    <h1 class="hero-h1">
+      Três Olimpíadas.<br>
+      Uma <em>Metodologia.</em>
+    </h1>
+    <p class="hero-sub-serif">
+      "O oceano não perdoa impreparo. Tampouco os melhores competidores do mundo."
+    </p>
+    <div class="hero-credentials">
+      <div class="credential-item"><div class="cred-dot"></div> <strong>3×</strong>&nbsp;Jogos Olímpicos — Atlanta, Sydney, Atenas</div>
+      <div class="credential-item"><div class="cred-dot"></div> <strong>28+</strong>&nbsp;Anos de competição internacional</div>
+      <div class="credential-item"><div class="cred-dot"></div> <strong>150+</strong>&nbsp;Atletas treinados em 12 países</div>
+    </div>
+    <div class="hero-btns">
+      <a href="#" class="btn-navy">Conhecer os Programas</a>
+      <a href="#" class="btn-text">Minha história</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">3×</div>
+    <div class="stat-l">Jogos Olímpicos</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">28+</div>
+    <div class="stat-l">Anos de Elite</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">150+</div>
+    <div class="stat-l">Atletas Treinados</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">12</div>
+    <div class="stat-l">Países Atendidos</div>
+  </div>
+</div>
+
+<!-- SOBRE -->
+<section class="sobre">
+  <div>
+    <div class="sobre-eyebrow">Quem é Bruno Fontes</div>
+    <h2 class="sobre-h2">Experiência olímpica<br>traduzida em <em>método.</em></h2>
+    <p class="sobre-p">
+      Três ciclos olímpicos. Dois oceanos. Uma certeza: o que separa o atleta do campeão não está no barco — está na forma como ele pensa, se prepara e decide sob pressão extrema.
+    </p>
+    <blockquote class="sobre-quote">
+      "Cada regata que participei foi uma aula. Hoje meu trabalho é condensar essas aulas em um método que funciona — para qualquer nível, em qualquer mare."
+    </blockquote>
+    <p class="sobre-p">
+      Bruno combina a vivência única de três Olimpíadas com metodologia científica de treinamento físico, mental e técnico. O resultado: atletas que evoluem de forma consistente, mensurável, sustentável.
+    </p>
+  </div>
+  <div class="sobre-img-col">
+    <div class="sobre-img-main">
+      <img src="../images/foto-vela.jpg" alt="Bruno Fontes">
+      <div class="sobre-img-main-icon"></div>
+      <div class="sobre-img-caption" style="position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 24px;background:linear-gradient(to top,rgba(11,28,46,0.85),transparent);font-size:0.62rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.55);">Regata Internacional — Florianópolis, SC</div>
+    </div>
+    <div class="sobre-img-badge">
+      <strong>3×</strong>
+      <span>Olímpico</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMAS -->
+<section class="programas">
+  <div class="section-header">
+    <div class="section-eyebrow">Como trabalhamos juntos</div>
+    <h2 class="section-h2">Programas de <em>Alta Performance</em></h2>
+  </div>
+  <div class="programs-grid">
+    <div class="prog-card">
+      <div class="prog-tag">Iniciante · Intermediário</div>
+      <div class="prog-title">Fitness Sailor</div>
+      <p class="prog-desc">Base técnica e condicionamento para quem quer levar a vela além do hobbie.</p>
+      <div class="prog-divider"></div>
+      <ul class="prog-features">
+        <li>Programas de condicionamento físico</li>
+        <li>Fundamentos de boat handling</li>
+        <li>Comunidade de atletas</li>
+        <li>2 sessões de Q&A ao mês</li>
+      </ul>
+      <a href="#" class="prog-cta">Começar →</a>
+    </div>
+    <div class="prog-card featured">
+      <div class="prog-tag">★ Programa Completo</div>
+      <div class="prog-title">Sailing Master</div>
+      <p class="prog-desc">Coaching individual com metodologia olímpica completa. Para o atleta sério.</p>
+      <div class="prog-divider"></div>
+      <ul class="prog-features">
+        <li>Coaching 1-a-1 com Bruno</li>
+        <li>Análise de vídeo de regatas</li>
+        <li>Estratégia e táticas avançadas</li>
+        <li>Plano nutricional personalizado</li>
+        <li>Mindset de alto rendimento</li>
+      </ul>
+      <a href="#" class="prog-cta">Aplicar →</a>
+    </div>
+    <div class="prog-card">
+      <div class="prog-tag">Masters 35+</div>
+      <div class="prog-title">Masters Club</div>
+      <p class="prog-desc">Performance máxima respeitando as fases do atleta maduro. Ciência e experiência.</p>
+      <div class="prog-divider"></div>
+      <ul class="prog-features">
+        <li>Protocolo adaptado para 35+</li>
+        <li>Longevidade atlética</li>
+        <li>Grupo exclusivo de masters</li>
+        <li>Sessões mensais ao vivo</li>
+      </ul>
+      <a href="#" class="prog-cta">Participar →</a>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="timeline-header">
+    <div class="section-eyebrow">Uma carreira de legado</div>
+    <h2 class="section-h2" style="color:var(--white);">O caminho <em style="color:var(--gold)">olímpico</em></h2>
+  </div>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-year">1996</div>
+      <div class="tl-content">
+        <div class="tl-event">Atlanta, EUA</div>
+        <div class="tl-desc">Primeira Olimpíada. Com 22 anos, entre os melhores velejadores do mundo.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2000</div>
+      <div class="tl-content">
+        <div class="tl-event">Sydney, Austrália</div>
+        <div class="tl-desc">Segundo ciclo olímpico. Consolidação na elite mundial da vela.</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2004</div>
+      <div class="tl-content">
+        <div class="tl-event">Atenas, Grécia</div>
+        <div class="tl-desc">Terceira Olimpíada. Experiência e maturidade: a combinação definitiva.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-line"></div>
+  <h2 class="cta-h2">Pronto para elevar<br>seu <em>nível de jogo</em>?</h2>
+  <p class="cta-sub">Vagas limitadas para coaching individual. Entre em contato e descubra o programa certo para você.</p>
+  <a href="#" class="btn-gold">Falar com Bruno</a>
+  <a href="#" class="btn-navy" style="display:inline-block; padding:18px 48px; font-size:0.7rem; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none;">Ver todos os programas →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Bruno <span>Fontes</span></div>
+  <div class="footer-copy">© 2025 — FLORIANÓPOLIS, SC — COACHING OLÍMPICO DE VELA</div>
+</footer>
+
+<div class="concept-badge">CONCEITO 2 — OLYMPIC GOLD</div>
+
+</body>
+</html>

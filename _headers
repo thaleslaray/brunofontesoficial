@@ -1,0 +1,22 @@
+# Cloudflare Pages — Cache-Control headers
+
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/conceitos/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/conceitos/*.html
+  Cache-Control: public, max-age=3600, s-maxage=86400
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
